@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
@@ -30,6 +31,11 @@ class Task
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tasks")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
 
     public function getId(): ?int
     {
@@ -68,6 +74,18 @@ class Task
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
