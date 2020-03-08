@@ -50,6 +50,7 @@ class TaskController extends AbstractController
                 'form_task_edit' => $form->createView()
             ]);
         } else {
+            $this->addFlash('error', 'Task Not found');
             return $this->redirectToRoute('tasks');
         }
     }
@@ -61,8 +62,9 @@ class TaskController extends AbstractController
             $pdo = $this->getDoctrine()->getManager();
             $pdo->remove($task);
             $pdo->flush();
+            $this->addFlash('sucess', 'delete sucess');
         } else {
-
+            $this->addFlash('error', 'task Not found');
         }
         return $this->redirectToRoute('tasks');
     }
@@ -70,7 +72,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/task/status/{id}?from={from}?user={user}", name="modify_status_task")
      */
-    public function status(Task $task=null,$from,$user){
+    public function status(Task $task=null,$from=null,$user=null){
         if ($task!=null) {
             $pdo = $this->getDoctrine()->getManager();
             $task->setStatus(!$task->getStatus());
@@ -78,13 +80,14 @@ class TaskController extends AbstractController
             $pdo->flush();
 
         } else {
-
+            $this->addFlash('error', 'Task Not found');
         }
         if ($from === 'task'){
             return $this->redirectToRoute('tasks');
         } elseif ($from === 'user'){
             return $this->redirectToRoute('edit_user',['id' => $user]);
         } else {
+            $this->addFlash('error', 'Not valid arg from');
             return $this->redirectToRoute('users');
         }
     }

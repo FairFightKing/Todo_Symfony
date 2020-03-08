@@ -3,13 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
     <p>Homepage <a href="/tasks">Tasks</a> | edit /task/edit/id</p>
     <p>Homepage <a href="/users">Users</a> | edit /user/edit/id</p>
+    <div class="container">
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <p class="alert alert-{{ type }}">{{ type }} : {{ message }}</p>
+        {% endfor %}
+    {% endfor %}
+
         {% block body %}
+    </div>
         {% endblock %}
-        {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -12,6 +12,7 @@
             <tr>
                 <th>Nom</th>
                 <th>Tasks assigned</th>
+                <th>Creation</th>
             </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                         </a>
                     </td>
                     <td>{{ user.tasks|length }}</td>
+                    <td>{{ user.creationdate|date('Y-m-d | H:i:s') }}</td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -17,7 +17,6 @@ class UserType extends AbstractType
             ->add('name')
             ->add('lastname')
             ->add('email', EmailType::class)
-            ->add('creationdate')
             ->add('save',SubmitType::class)
         ;
     }

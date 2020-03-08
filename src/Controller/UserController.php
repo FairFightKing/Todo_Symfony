@@ -51,7 +51,8 @@ class UserController extends AbstractController
             'form_user_edit' => $form->createView()
         ]);
         } else {
-        return $this->redirectToRoute('users');
+            $this->addFlash('error', 'User Not found');
+            return $this->redirectToRoute('users');
         }
     }
 }
