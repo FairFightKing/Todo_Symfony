@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ task.name }}{% endblock %}
+
+{% block body %}
+    <h1>This task is : {{ task.name }}</h1>
+
+    <h2>Modify this task : </h2>
+
+    {{ form(form_task_edit) }}
+{% endblock %}

@@ -35,7 +35,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/edit/{id}", name="edit_user")
      * */
-    public function edit(User $user,Request $request)
+    public function edit(User $user=null,Request $request)
     {
         if ($user != null) {
         $form = $this->createForm(UserType::class, $user);

@@ -34,8 +34,24 @@ class TaskController extends AbstractController
     /**
      * @Route("/task/edit/{id}",name="edit_task")
      * */
-    public function edit()
+    public function edit(Task $task=null, Request $request)
     {
+        if ($task != null) {
+            $form = $this->createForm(TaskType::class, $task);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $pdo = $this->getDoctrine()->getManager();
+                $pdo->persist($task);
+                $pdo->flush();
+            }
+
+            return $this->render('task/edit.html.twig', [
+                'task' => $task,
+                'form_task_edit' => $form->createView()
+            ]);
+        } else {
+            return $this->redirectToRoute('tasks');
+        }
 
     }
 }
