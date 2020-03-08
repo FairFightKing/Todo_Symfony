@@ -48,6 +48,8 @@ class User
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $date = new \DateTime();
+        $this->setCreationdate($date);
     }
 
     public function getId(): ?int
@@ -91,7 +93,7 @@ class User
         return $this;
     }
 
-    public function getCreationdate(): ?\DateTimeInterface
+        public function getCreationdate(): ?\DateTimeInterface
     {
         return $this->creationdate;
     }
