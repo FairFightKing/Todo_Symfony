@@ -14,7 +14,6 @@
     {% if user.tasks is not empty %}
         {% for task in user.tasks %}
             <p>assigned {{ task.name }} | for : {{ task.deadline|date('Y-m-d') }} | status{% if task.status == true %} DONE{% else %} UNDONE{% endif %};</p>
-            {{  }}
             <hr/>
         {% endfor %}
     {% else %}
