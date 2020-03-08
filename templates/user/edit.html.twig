@@ -14,6 +14,10 @@
     {% if user.tasks is not empty %}
         {% for task in user.tasks %}
             <p>assigned {{ task.name }} | for : {{ task.deadline|date('Y-m-d') }} | status{% if task.status == true %} DONE{% else %} UNDONE{% endif %};</p>
+            <a href="{{ path('modify_status_task',{'id':task.id,'from':'user','user':user.id}) }}">Change status</a>
+            <a href="{{ path('delete_task',{'id':task.id}) }}">
+                delete
+            </a>
             <hr/>
         {% endfor %}
     {% else %}

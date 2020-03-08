@@ -12,6 +12,8 @@
             <tr>
                 <th>name</th>
                 <th>status</th>
+                <th>Change status</th>
+                <th>delete</th>
             </tr>
             </thead>
             <tbody>
@@ -22,6 +24,12 @@
                         </a>
                     </td>
                     <td>Status {% if task.status == true %} DONE{% else %} UNDONE{% endif %}</td>
+                    <td><a href="{{ path('modify_status_task',{'id':task.id,'from':'task'}) }}">
+                            Change
+                        </a></td>
+                    <td><a href="{{ path('delete_task',{'id':task.id}) }}">
+                            delete
+                        </a></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -52,6 +52,40 @@ class TaskController extends AbstractController
         } else {
             return $this->redirectToRoute('tasks');
         }
+    }
+    /**
+     * @Route("/task/delete/{id}", name="delete_task")
+     */
+    public function delete(Task $task=null){
+        if ($task != null){
+            $pdo = $this->getDoctrine()->getManager();
+            $pdo->remove($task);
+            $pdo->flush();
+        } else {
 
+        }
+        return $this->redirectToRoute('tasks');
+    }
+
+    /**
+     * @Route("/task/status/{id}?from={from}?user={user}", name="modify_status_task")
+     */
+    public function status(Task $task=null,$from,$user){
+        if ($task!=null) {
+            $pdo = $this->getDoctrine()->getManager();
+            $task->setStatus(!$task->getStatus());
+            $pdo->persist($task);
+            $pdo->flush();
+
+        } else {
+
+        }
+        if ($from === 'task'){
+            return $this->redirectToRoute('tasks');
+        } elseif ($from === 'user'){
+            return $this->redirectToRoute('edit_user',['id' => $user]);
+        } else {
+            return $this->redirectToRoute('users');
+        }
     }
 }
