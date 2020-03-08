@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TaskController!{% endblock %}
+{% block title %}Tasks{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Hers's a list of tasks</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% if tasks is not empty %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/fairfightking/DW/symfony_exo/src/Controller/TaskController.php'|file_link(0) }}">src/Controller/TaskController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/fairfightking/DW/symfony_exo/templates/task/index.html.twig'|file_link(0) }}">templates/task/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td><a href="{{ path('edit_task',{'id':task.id}) }}">
+                            {{ task.name }}
+                        </a>
+                    </td>
+                    <td>Status {% if task.status == true %} DONE{% else %} UNDONE{% endif %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <h2>There's no tasks</h2>
+    {% endif %}
+
+    {{ form(add_task_form) }}
 {% endblock %}
