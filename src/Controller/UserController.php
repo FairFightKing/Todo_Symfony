@@ -37,6 +37,21 @@ class UserController extends AbstractController
      * */
     public function edit(User $user,Request $request)
     {
+        if ($user != null) {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pdo = $this->getDoctrine()->getManager();
+            $pdo->persist($user);
+            $pdo->flush();
+        }
 
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form_user_edit' => $form->createView()
+        ]);
+        } else {
+        return $this->redirectToRoute('users');
+        }
     }
 }
